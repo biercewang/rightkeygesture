@@ -1,49 +1,49 @@
 {
   "gestures": {
     "R": {
-      "name": "Option+Control+ANSI_M",
+      "name": "Right",
       "keys": [
         {
-          "keyCode": 46,
+          "keyCode": 124,
           "modifiers": [
-            "option",
-            "control"
+            "control",
+            "option"
           ]
         }
       ]
     },
     "L": {
-      "name": "Option+Control+LeftArrow",
+      "name": "Left",
       "keys": [
         {
           "keyCode": 123,
           "modifiers": [
-            "option",
-            "control"
+            "control",
+            "option"
           ]
         }
       ]
     },
     "U": {
-      "name": "Option+Control+UpArrow",
+      "name": "Top",
       "keys": [
         {
           "keyCode": 126,
           "modifiers": [
-            "option",
-            "control"
+            "control",
+            "option"
           ]
         }
       ]
     },
     "D": {
-      "name": "Option+Control+DownArrow",
+      "name": "Bottom",
       "keys": [
         {
           "keyCode": 125,
           "modifiers": [
-            "option",
-            "control"
+            "control",
+            "option"
           ]
         }
       ]

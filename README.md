@@ -44,10 +44,10 @@ The bundled default config is the current migrated personal config used on the d
 
 | Gesture | Shortcut |
 | --- | --- |
-| Left | `Option + Control + LeftArrow` |
-| Right | `Option + Control + RightArrow` |
-| Up | `Option + Control + UpArrow` |
-| Down | `Option + Control + DownArrow` |
+| Left | `Control + Option + LeftArrow` |
+| Right | `Control + Option + RightArrow` |
+| Top | `Control + Option + UpArrow` |
+| Bottom | `Control + Option + DownArrow` |
 | Left-up diagonal | `Command + M` |
 | Left-down diagonal | `Command + Shift + 2` |
 | Right-up diagonal | `Command + Control + Shift + 4` |
