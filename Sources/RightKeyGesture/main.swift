@@ -133,16 +133,53 @@ final class ShortcutSender {
     func send(_ action: ShortcutAction) {
         for stroke in action.keys {
             let flags = eventFlags(for: stroke.modifiers)
-            guard
-                let down = CGEvent(keyboardEventSource: source, virtualKey: CGKeyCode(stroke.keyCode), keyDown: true),
-                let up = CGEvent(keyboardEventSource: source, virtualKey: CGKeyCode(stroke.keyCode), keyDown: false)
-            else { continue }
+            let modifierKeyCodes = keyCodes(forModifiers: stroke.modifiers)
 
-            down.flags = flags
-            up.flags = flags
-            down.post(tap: .cghidEventTap)
-            up.post(tap: .cghidEventTap)
+            for keyCode in modifierKeyCodes {
+                postKey(CGKeyCode(keyCode), keyDown: true, flags: flags)
+                usleep(8_000)
+            }
+
+            usleep(12_000)
+            postKey(CGKeyCode(stroke.keyCode), keyDown: true, flags: flags)
             usleep(20_000)
+            postKey(CGKeyCode(stroke.keyCode), keyDown: false, flags: flags)
+            usleep(12_000)
+
+            for keyCode in modifierKeyCodes.reversed() {
+                postKey(CGKeyCode(keyCode), keyDown: false, flags: [])
+                usleep(8_000)
+            }
+
+            usleep(20_000)
+        }
+    }
+
+    private func postKey(_ keyCode: CGKeyCode, keyDown: Bool, flags: CGEventFlags) {
+        guard
+            let event = CGEvent(keyboardEventSource: source, virtualKey: keyCode, keyDown: keyDown)
+        else {
+            return
+        }
+
+        event.flags = flags
+        event.post(tap: .cghidEventTap)
+    }
+
+    private func keyCodes(forModifiers names: [String]) -> [Int] {
+        names.compactMap { name in
+            switch name.lowercased() {
+            case "command", "cmd", "meta":
+                return kVK_Command
+            case "shift":
+                return kVK_Shift
+            case "option", "alt":
+                return kVK_Option
+            case "control", "ctrl":
+                return kVK_Control
+            default:
+                return nil
+            }
         }
     }
 
