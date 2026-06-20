@@ -1,0 +1,155 @@
+# RightKeyGesture / WeGestureARM
+
+RightKeyGesture is a small native macOS utility for Apple Silicon Macs. It lives in the menu bar, listens for right-button mouse gestures, and sends the configured keyboard shortcuts.
+
+The app bundle built by this repository is currently named `WeGestureARM.app`.
+
+## Why This Exists
+
+The original `WGestures.app` works well on older Intel Macs, but it is not reliable on Apple Silicon Macs. This project recreates the parts I use most:
+
+- hold right mouse button and draw a gesture
+- hold right mouse button and press another mouse button
+- trigger keyboard shortcuts from those gestures
+- import existing WGestures gesture settings where possible
+
+## Relationship To WGestures
+
+This is an independent Swift/AppKit implementation.
+
+- It does not include, copy, decompile, or derive from WGestures source code.
+- It reads the user's local WGestures JSON settings only for migration.
+- It is not affiliated with YingDev or the original WGestures project.
+- The goal is compatibility with a personal workflow on Apple Silicon, not a full reimplementation of every WGestures feature.
+
+## Install
+
+Download or build `WeGestureARM.app`, then move it to `/Applications`.
+
+On first launch, enable both permissions:
+
+- System Settings -> Privacy & Security -> Accessibility -> `WeGesture ARM`
+- System Settings -> Privacy & Security -> Input Monitoring -> `WeGesture ARM`
+
+Quit and reopen the app after granting permissions. The menu bar item shows:
+
+- `WG`: listener is running
+- `WG!`: listener failed, usually because permissions are missing or stale
+
+If it shows `WG!`, open the menu and choose `Restart Listener` after fixing permissions.
+
+## Default Gestures
+
+Hold the right mouse button, draw the gesture, then release:
+
+| Gesture | Shortcut |
+| --- | --- |
+| L | `Command + [` |
+| R | `Command + ]` |
+| U | `Command + T` |
+| D | `Command + W` |
+| UD | `Command + L` |
+| DU | `Command + R` |
+| LR | `Control + Shift + Tab` |
+| RL | `Control + Tab` |
+| DR | `Command + H` |
+| DL | `Command + Q` |
+
+Mouse-button chords:
+
+| Chord | Shortcut |
+| --- | --- |
+| Right + Left | `Command + Q` |
+| Right + Middle | `Command + T` |
+| Right + Mouse4 | `Command + [` |
+| Right + Mouse5 | `Command + ]` |
+
+## Import WGestures Settings
+
+If the old WGestures config exists at:
+
+```text
+~/Library/Application Support/com.yingdev.wgestures/2.3.3/gestures.json
+```
+
+run:
+
+```sh
+node Scripts/import-wgestures.js
+```
+
+The imported config is written to:
+
+```text
+~/Library/Application Support/WeGestureARM/gestures.json
+```
+
+Existing configs are backed up automatically before import.
+
+## Customize Gestures
+
+Edit:
+
+```text
+~/Library/Application Support/WeGestureARM/gestures.json
+```
+
+Then choose `Reload Config` from the menu bar item.
+
+Example:
+
+```json
+{
+  "gestures": {
+    "L": {
+      "name": "Back",
+      "keys": [{ "keyCode": 33, "modifiers": ["command"] }]
+    }
+  },
+  "mouseButtons": {
+    "R+Left": {
+      "name": "Quit App",
+      "keys": [{ "keyCode": 12, "modifiers": ["command"] }]
+    }
+  },
+  "templates": []
+}
+```
+
+`templates` stores migrated WGestures point paths. It lets the app distinguish diagonal or custom drawn gestures that cannot be represented by plain `L/R/U/D` strings.
+
+## Build
+
+Requirements:
+
+- macOS 14 or newer
+- Xcode command line tools or Xcode
+- Swift 6
+
+Build the app:
+
+```sh
+make app
+```
+
+Install locally:
+
+```sh
+make install
+```
+
+Create a zip package for another Mac:
+
+```sh
+make package
+```
+
+The package is written to:
+
+```text
+dist/WeGestureARM-macOS-arm64.zip
+```
+
+## Notes
+
+The app is ad-hoc signed for local use. On another Mac, macOS may require opening it from Finder once and confirming the security prompt. If permissions look enabled but gestures do nothing, remove the app from Accessibility and Input Monitoring, add `/Applications/WeGestureARM.app` again, then restart the app.
