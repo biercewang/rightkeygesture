@@ -17,6 +17,13 @@ struct ShortcutAction: Codable {
 
     let name: String
     let keys: [KeyStroke]
+    let delivery: String?
+
+    init(name: String, keys: [KeyStroke], delivery: String? = nil) {
+        self.name = name
+        self.keys = keys
+        self.delivery = delivery
+    }
 }
 
 struct GestureConfig: Codable {
@@ -132,6 +139,12 @@ final class ShortcutSender {
 
     func send(_ action: ShortcutAction) {
         for stroke in action.keys {
+            if action.delivery == "systemEvents" {
+                sendViaSystemEvents(stroke)
+                usleep(20_000)
+                continue
+            }
+
             let flags = eventFlags(for: stroke.modifiers)
             let modifierKeyCodes = keyCodes(forModifiers: stroke.modifiers)
 
@@ -164,6 +177,34 @@ final class ShortcutSender {
 
         event.flags = flags
         event.post(tap: .cghidEventTap)
+    }
+
+    private func sendViaSystemEvents(_ stroke: ShortcutAction.KeyStroke) {
+        let modifiers = stroke.modifiers.compactMap { modifier in
+            appleScriptModifierName(for: modifier).map { "\($0) down" }
+        }
+        let usingClause = modifiers.isEmpty ? "" : " using {\(modifiers.joined(separator: ", "))}"
+        let source = "tell application \"System Events\" to key code \(stroke.keyCode)\(usingClause)"
+        var error: NSDictionary?
+        NSAppleScript(source: source)?.executeAndReturnError(&error)
+        if let error {
+            NSLog("RightKeyGesture System Events shortcut failed: \(error)")
+        }
+    }
+
+    private func appleScriptModifierName(for name: String) -> String? {
+        switch name.lowercased() {
+        case "command", "cmd", "meta":
+            return "command"
+        case "shift":
+            return "shift"
+        case "option", "alt":
+            return "option"
+        case "control", "ctrl":
+            return "control"
+        default:
+            return nil
+        }
     }
 
     private func keyCodes(forModifiers names: [String]) -> [Int] {

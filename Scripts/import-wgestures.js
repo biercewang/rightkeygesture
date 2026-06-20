@@ -96,7 +96,9 @@ function actionFor(command, fallbackName) {
   if (keyCode === null) {
     throw new Error(`Missing non-modifier key for ${fallbackName}`);
   }
-  return { name: fallbackName, keys: [{ keyCode, modifiers }] };
+  const action = { name: fallbackName, keys: [{ keyCode, modifiers }] };
+  if (command.IsSystemHotKey) action.delivery = "systemEvents";
+  return action;
 }
 
 function simpleCode(points) {

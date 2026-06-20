@@ -10,7 +10,8 @@
             "option"
           ]
         }
-      ]
+      ],
+      "delivery": "systemEvents"
     },
     "L": {
       "name": "Left",
@@ -22,7 +23,8 @@
             "option"
           ]
         }
-      ]
+      ],
+      "delivery": "systemEvents"
     },
     "U": {
       "name": "Top",
@@ -34,7 +36,8 @@
             "option"
           ]
         }
-      ]
+      ],
+      "delivery": "systemEvents"
     },
     "D": {
       "name": "Bottom",
@@ -46,7 +49,8 @@
             "option"
           ]
         }
-      ]
+      ],
+      "delivery": "systemEvents"
     }
   },
   "mouseButtons": {
@@ -109,7 +113,8 @@
               "option"
             ]
           }
-        ]
+        ],
+        "delivery": "systemEvents"
       }
     },
     {
@@ -130,7 +135,8 @@
               "option"
             ]
           }
-        ]
+        ],
+        "delivery": "systemEvents"
       }
     },
     {
@@ -155,7 +161,8 @@
               "option"
             ]
           }
-        ]
+        ],
+        "delivery": "systemEvents"
       }
     },
     {
@@ -178,7 +185,8 @@
               "option"
             ]
           }
-        ]
+        ],
+        "delivery": "systemEvents"
       }
     },
     {

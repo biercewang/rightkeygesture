@@ -23,7 +23,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>RightKeyGesture 需要发送快捷键来执行你配置的鼠标手势动作。</string>
+	<string>RightKeyGesture 需要控制 System Events 来触发 Magnet 等全局快捷键。</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026</string>
 </dict>

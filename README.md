@@ -31,6 +31,7 @@ On first launch, enable both permissions:
 
 - System Settings -> Privacy & Security -> Accessibility -> `RightKeyGesture`
 - System Settings -> Privacy & Security -> Input Monitoring -> `RightKeyGesture`
+- System Settings -> Privacy & Security -> Automation -> allow `RightKeyGesture` to control `System Events`
 
 Quit and reopen the app after granting permissions. The menu bar item shows:
 
@@ -38,6 +39,8 @@ Quit and reopen the app after granting permissions. The menu bar item shows:
 - `RKG!`: listener failed, usually because permissions are missing or stale
 
 If it shows `RKG!`, open the menu and choose `Restart Listener` after fixing permissions.
+
+The bundled Left/Right/Top/Bottom shortcuts target Magnet. Magnet registers these as global system hotkeys, and it does not reliably respond to direct `CGEvent` keyboard synthesis. RightKeyGesture therefore sends those specific actions through macOS `System Events`, which may trigger an Automation permission prompt the first time you use one.
 
 ## Default Gestures
 
