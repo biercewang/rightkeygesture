@@ -68,7 +68,11 @@ final class ConfigStore {
 
     func load() -> GestureConfig {
         if !FileManager.default.fileExists(atPath: url.path) {
-            save(GestureConfig.defaultConfig)
+            if let bundledConfig = loadBundledDefault() {
+                save(bundledConfig)
+            } else {
+                save(GestureConfig.defaultConfig)
+            }
         }
 
         do {
@@ -77,6 +81,20 @@ final class ConfigStore {
         } catch {
             NSLog("Failed to read config: \(error)")
             return GestureConfig.defaultConfig
+        }
+    }
+
+    private func loadBundledDefault() -> GestureConfig? {
+        guard let bundledURL = Bundle.main.url(forResource: "default-gestures", withExtension: "json") else {
+            return nil
+        }
+
+        do {
+            let data = try Data(contentsOf: bundledURL)
+            return try decoder.decode(GestureConfig.self, from: data)
+        } catch {
+            NSLog("Failed to read bundled default config: \(error)")
+            return nil
         }
     }
 

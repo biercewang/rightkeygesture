@@ -15,6 +15,7 @@ app: build
 	mkdir -p "$(APP_DIR)/Contents/MacOS" "$(APP_DIR)/Contents/Resources"
 	cp "$(EXECUTABLE)" "$(APP_DIR)/Contents/MacOS/$(APP_NAME)"
 	cp Resources/Info.plist "$(APP_DIR)/Contents/Info.plist"
+	cp Resources/*.json "$(APP_DIR)/Contents/Resources/" 2>/dev/null || true
 	plutil -convert binary1 "$(APP_DIR)/Contents/Info.plist"
 	codesign --force --deep --sign - "$(APP_DIR)"
 	@echo "Built $(APP_DIR)"

@@ -40,29 +40,24 @@ If it shows `WG!`, open the menu and choose `Restart Listener` after fixing perm
 
 ## Default Gestures
 
-Hold the right mouse button, draw the gesture, then release:
+The bundled default config is the current migrated personal config used on the development Mac. Hold the right mouse button, draw the gesture, then release:
 
 | Gesture | Shortcut |
 | --- | --- |
-| L | `Command + [` |
-| R | `Command + ]` |
-| U | `Command + T` |
-| D | `Command + W` |
-| UD | `Command + L` |
-| DU | `Command + R` |
-| LR | `Control + Shift + Tab` |
-| RL | `Control + Tab` |
-| DR | `Command + H` |
-| DL | `Command + Q` |
+| Left | `Option + Control + LeftArrow` |
+| Right | `Option + Control + RightArrow` |
+| Up | `Option + Control + UpArrow` |
+| Down | `Option + Control + DownArrow` |
+| Left-up diagonal | `Command + M` |
+| Left-down diagonal | `Command + Shift + 2` |
+| Right-up diagonal | `Command + Control + Shift + 4` |
+| Right-down diagonal | `Option + Control + M` |
 
 Mouse-button chords:
 
 | Chord | Shortcut |
 | --- | --- |
 | Right + Left | `Command + Q` |
-| Right + Middle | `Command + T` |
-| Right + Mouse4 | `Command + [` |
-| Right + Mouse5 | `Command + ]` |
 
 ## Import WGestures Settings
 

@@ -1,0 +1,255 @@
+{
+  "gestures": {
+    "R": {
+      "name": "Option+Control+ANSI_M",
+      "keys": [
+        {
+          "keyCode": 46,
+          "modifiers": [
+            "option",
+            "control"
+          ]
+        }
+      ]
+    },
+    "L": {
+      "name": "Option+Control+LeftArrow",
+      "keys": [
+        {
+          "keyCode": 123,
+          "modifiers": [
+            "option",
+            "control"
+          ]
+        }
+      ]
+    },
+    "U": {
+      "name": "Option+Control+UpArrow",
+      "keys": [
+        {
+          "keyCode": 126,
+          "modifiers": [
+            "option",
+            "control"
+          ]
+        }
+      ]
+    },
+    "D": {
+      "name": "Option+Control+DownArrow",
+      "keys": [
+        {
+          "keyCode": 125,
+          "modifiers": [
+            "option",
+            "control"
+          ]
+        }
+      ]
+    }
+  },
+  "mouseButtons": {
+    "R+Left": {
+      "name": "Quit App",
+      "keys": [
+        {
+          "keyCode": 12,
+          "modifiers": [
+            "command"
+          ]
+        }
+      ]
+    }
+  },
+  "templates": [
+    {
+      "name": "Command+Control+Shift+ANSI_4",
+      "points": [
+        705,
+        323,
+        834,
+        411,
+        840,
+        417,
+        847,
+        422,
+        859,
+        435
+      ],
+      "action": {
+        "name": "Command+Control+Shift+ANSI_4",
+        "keys": [
+          {
+            "keyCode": 21,
+            "modifiers": [
+              "command",
+              "control",
+              "shift"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Option+Control+LeftArrow",
+      "points": [
+        891,
+        406,
+        745,
+        396
+      ],
+      "action": {
+        "name": "Option+Control+LeftArrow",
+        "keys": [
+          {
+            "keyCode": 123,
+            "modifiers": [
+              "option",
+              "control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Option+Control+RightArrow",
+      "points": [
+        676,
+        356,
+        870,
+        357
+      ],
+      "action": {
+        "name": "Option+Control+RightArrow",
+        "keys": [
+          {
+            "keyCode": 124,
+            "modifiers": [
+              "option",
+              "control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Option+Control+UpArrow",
+      "points": [
+        871,
+        300,
+        874,
+        345,
+        872,
+        354,
+        870,
+        414
+      ],
+      "action": {
+        "name": "Option+Control+UpArrow",
+        "keys": [
+          {
+            "keyCode": 126,
+            "modifiers": [
+              "option",
+              "control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Option+Control+DownArrow",
+      "points": [
+        834,
+        387,
+        837,
+        310,
+        833,
+        277
+      ],
+      "action": {
+        "name": "Option+Control+DownArrow",
+        "keys": [
+          {
+            "keyCode": 125,
+            "modifiers": [
+              "option",
+              "control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Command+Shift+ANSI_2",
+      "points": [
+        833,
+        407,
+        677,
+        300
+      ],
+      "action": {
+        "name": "Command+Shift+ANSI_2",
+        "keys": [
+          {
+            "keyCode": 19,
+            "modifiers": [
+              "command",
+              "shift"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Command+ANSI_M",
+      "points": [
+        914,
+        358,
+        909,
+        365,
+        846,
+        421,
+        768,
+        465
+      ],
+      "action": {
+        "name": "Command+ANSI_M",
+        "keys": [
+          {
+            "keyCode": 46,
+            "modifiers": [
+              "command"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Option+Control+ANSI_M",
+      "points": [
+        798,
+        434,
+        956,
+        313,
+        987,
+        297,
+        996,
+        295
+      ],
+      "action": {
+        "name": "Option+Control+ANSI_M",
+        "keys": [
+          {
+            "keyCode": 46,
+            "modifiers": [
+              "option",
+              "control"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
