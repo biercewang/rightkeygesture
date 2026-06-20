@@ -140,7 +140,7 @@
       }
     },
     {
-      "name": "Top",
+      "name": "Bottom",
       "points": [
         871,
         300,
@@ -152,10 +152,10 @@
         414
       ],
       "action": {
-        "name": "Top",
+        "name": "Bottom",
         "keys": [
           {
-            "keyCode": 126,
+            "keyCode": 125,
             "modifiers": [
               "control",
               "option"
@@ -166,7 +166,7 @@
       }
     },
     {
-      "name": "Bottom",
+      "name": "Top",
       "points": [
         834,
         387,
@@ -176,10 +176,10 @@
         277
       ],
       "action": {
-        "name": "Bottom",
+        "name": "Top",
         "keys": [
           {
-            "keyCode": 125,
+            "keyCode": 126,
             "modifiers": [
               "control",
               "option"

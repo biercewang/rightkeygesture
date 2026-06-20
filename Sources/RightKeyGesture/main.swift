@@ -395,7 +395,7 @@ final class GestureEngine {
         if abs(dx) > abs(dy) {
             direction = dx > 0 ? .right : .left
         } else {
-            direction = dy > 0 ? .up : .down
+            direction = dy > 0 ? .down : .up
         }
 
         if directions.last != direction {
