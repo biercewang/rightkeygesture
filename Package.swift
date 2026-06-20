@@ -2,17 +2,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "WeGestureARM",
+    name: "RightKeyGesture",
     platforms: [
         .macOS(.v14)
     ],
     products: [
-        .executable(name: "WeGestureARM", targets: ["WeGestureARM"])
+        .executable(name: "RightKeyGesture", targets: ["RightKeyGesture"])
     ],
     targets: [
         .executableTarget(
-            name: "WeGestureARM",
-            path: "Sources/WeGestureARM"
+            name: "RightKeyGesture",
+            path: "Sources/RightKeyGesture"
         )
     ]
 )

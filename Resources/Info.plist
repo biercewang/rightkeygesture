@@ -5,13 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleExecutable</key>
-	<string>WeGestureARM</string>
+	<string>RightKeyGesture</string>
 	<key>CFBundleIdentifier</key>
-	<string>local.wegesture.arm</string>
+	<string>local.rightkeygesture</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>WeGesture ARM</string>
+	<string>RightKeyGesture</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -23,7 +23,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>WeGesture ARM 需要发送快捷键来执行你配置的鼠标手势动作。</string>
+	<string>RightKeyGesture 需要发送快捷键来执行你配置的鼠标手势动作。</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026</string>
 </dict>

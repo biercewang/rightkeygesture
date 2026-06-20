@@ -8,7 +8,7 @@ const oldPath = path.join(
   os.homedir(),
   "Library/Application Support/com.yingdev.wgestures/2.3.3/gestures.json",
 );
-const newDir = path.join(os.homedir(), "Library/Application Support/WeGestureARM");
+const newDir = path.join(os.homedir(), "Library/Application Support/RightKeyGesture");
 const newPath = path.join(newDir, "gestures.json");
 
 const keyCodes = {

@@ -60,7 +60,7 @@ final class ConfigStore {
 
     init() {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let directory = base.appendingPathComponent("WeGestureARM", isDirectory: true)
+        let directory = base.appendingPathComponent("RightKeyGesture", isDirectory: true)
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         url = directory.appendingPathComponent("gestures.json")
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -68,7 +68,9 @@ final class ConfigStore {
 
     func load() -> GestureConfig {
         if !FileManager.default.fileExists(atPath: url.path) {
-            if let bundledConfig = loadBundledDefault() {
+            if migrateLegacyConfigIfAvailable() {
+                return load()
+            } else if let bundledConfig = loadBundledDefault() {
                 save(bundledConfig)
             } else {
                 save(GestureConfig.defaultConfig)
@@ -95,6 +97,23 @@ final class ConfigStore {
         } catch {
             NSLog("Failed to read bundled default config: \(error)")
             return nil
+        }
+    }
+
+    private func migrateLegacyConfigIfAvailable() -> Bool {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let legacyURL = base.appendingPathComponent("WeGestureARM/gestures.json")
+        guard FileManager.default.fileExists(atPath: legacyURL.path) else {
+            return false
+        }
+
+        do {
+            try FileManager.default.copyItem(at: legacyURL, to: url)
+            NSLog("RightKeyGesture migrated legacy config from \(legacyURL.path)")
+            return true
+        } catch {
+            NSLog("RightKeyGesture failed to migrate legacy config: \(error)")
+            return false
         }
     }
 
@@ -204,7 +223,7 @@ final class GestureEngine {
 
         guard let eventTap else {
             state = .permissionDenied
-            NSLog("WeGestureARM event tap creation failed. Accessibility/Input Monitoring permission is probably missing or stale.")
+            NSLog("RightKeyGesture event tap creation failed. Accessibility/Input Monitoring permission is probably missing or stale.")
             showPermissionAlert()
             return false
         }
@@ -213,7 +232,7 @@ final class GestureEngine {
         CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: eventTap, enable: true)
         state = .running
-        NSLog("WeGestureARM event tap started.")
+        NSLog("RightKeyGesture event tap started.")
         return true
     }
 
@@ -261,13 +280,13 @@ final class GestureEngine {
                 return nil
             }
             if let action = matchTemplate() {
-                NSLog("WeGestureARM matched template: \(action.name)")
+                NSLog("RightKeyGesture matched template: \(action.name)")
                 sender.send(action)
                 return nil
             }
             let code = directions.map(\.rawValue).joined()
             if let action = config.gestures[code] {
-                NSLog("WeGestureARM matched gesture \(code): \(action.name)")
+                NSLog("RightKeyGesture matched gesture \(code): \(action.name)")
                 sender.send(action)
                 return nil
             }
@@ -312,7 +331,7 @@ final class GestureEngine {
         rawPoints.removeAll(keepingCapacity: true)
         directions.removeAll(keepingCapacity: true)
         if let action = config.mouseButtons[name] {
-            NSLog("WeGestureARM matched mouse chord \(name): \(action.name)")
+            NSLog("RightKeyGesture matched mouse chord \(name): \(action.name)")
             sender.send(action)
         }
     }
@@ -426,7 +445,7 @@ final class GestureEngine {
     private func showPermissionAlert() {
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "WeGesture ARM 需要权限"
+            alert.messageText = "RightKeyGesture 需要权限"
             alert.informativeText = "请在“系统设置 -> 隐私与安全性”里允许辅助功能和输入监控，然后重新打开 app。"
             alert.addButton(withTitle: "打开系统设置")
             alert.addButton(withTitle: "稍后")
@@ -455,11 +474,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "WG"
-        statusItem.button?.toolTip = "WeGesture ARM"
+        statusItem.button?.title = "RKG"
+        statusItem.button?.toolTip = "RightKeyGesture"
 
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "WeGesture ARM", action: nil, keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "RightKeyGesture", action: nil, keyEquivalent: ""))
         menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: "Reload Config", action: #selector(reloadConfig), keyEquivalent: "r"))
         menu.addItem(NSMenuItem(title: "Restart Listener", action: #selector(restartListener), keyEquivalent: "l"))
@@ -496,8 +515,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func restartEngine() {
         engine.stop()
         let ok = engine.start()
-        statusItem.button?.title = ok ? "WG" : "WG!"
-        statusItem.button?.toolTip = ok ? "WeGesture ARM: listening" : "WeGesture ARM: listener failed, check permissions"
+        statusItem.button?.title = ok ? "RKG" : "RKG!"
+        statusItem.button?.toolTip = ok ? "RightKeyGesture: listening" : "RightKeyGesture: listener failed, check permissions"
     }
 
     @objc private func openConfig() {

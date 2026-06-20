@@ -1,12 +1,12 @@
-# RightKeyGesture / WeGestureARM
+# RightKeyGesture
 
 RightKeyGesture is a small native macOS utility for Apple Silicon Macs. It lives in the menu bar, listens for right-button mouse gestures, and sends the configured keyboard shortcuts.
 
-The app bundle built by this repository is currently named `WeGestureARM.app`.
-
 ## Why This Exists
 
-The original `WGestures.app` works well on older Intel Macs, but it is not reliable on Apple Silicon Macs. This project recreates the parts I use most:
+The original `WGestures.app` works well on older Intel Macs, but it is not reliable on Apple Silicon Macs. I like WGestures a lot and bought a license serial number for it; this project exists because I still want that style of right-button gesture workflow on my Apple Silicon Macs.
+
+This project recreates the parts I use most:
 
 - hold right mouse button and draw a gesture
 - hold right mouse button and press another mouse button
@@ -20,23 +20,24 @@ This is an independent Swift/AppKit implementation.
 - It does not include, copy, decompile, or derive from WGestures source code.
 - It reads the user's local WGestures JSON settings only for migration.
 - It is not affiliated with YingDev or the original WGestures project.
+- The author likes WGestures and has purchased a software serial number.
 - The goal is compatibility with a personal workflow on Apple Silicon, not a full reimplementation of every WGestures feature.
 
 ## Install
 
-Download or build `WeGestureARM.app`, then move it to `/Applications`.
+Download or build `RightKeyGesture.app`, then move it to `/Applications`.
 
 On first launch, enable both permissions:
 
-- System Settings -> Privacy & Security -> Accessibility -> `WeGesture ARM`
-- System Settings -> Privacy & Security -> Input Monitoring -> `WeGesture ARM`
+- System Settings -> Privacy & Security -> Accessibility -> `RightKeyGesture`
+- System Settings -> Privacy & Security -> Input Monitoring -> `RightKeyGesture`
 
 Quit and reopen the app after granting permissions. The menu bar item shows:
 
-- `WG`: listener is running
-- `WG!`: listener failed, usually because permissions are missing or stale
+- `RKG`: listener is running
+- `RKG!`: listener failed, usually because permissions are missing or stale
 
-If it shows `WG!`, open the menu and choose `Restart Listener` after fixing permissions.
+If it shows `RKG!`, open the menu and choose `Restart Listener` after fixing permissions.
 
 ## Default Gestures
 
@@ -76,7 +77,7 @@ node Scripts/import-wgestures.js
 The imported config is written to:
 
 ```text
-~/Library/Application Support/WeGestureARM/gestures.json
+~/Library/Application Support/RightKeyGesture/gestures.json
 ```
 
 Existing configs are backed up automatically before import.
@@ -86,7 +87,7 @@ Existing configs are backed up automatically before import.
 Edit:
 
 ```text
-~/Library/Application Support/WeGestureARM/gestures.json
+~/Library/Application Support/RightKeyGesture/gestures.json
 ```
 
 Then choose `Reload Config` from the menu bar item.
@@ -97,8 +98,8 @@ Example:
 {
   "gestures": {
     "L": {
-      "name": "Back",
-      "keys": [{ "keyCode": 33, "modifiers": ["command"] }]
+      "name": "Left",
+      "keys": [{ "keyCode": 123, "modifiers": ["control", "option"] }]
     }
   },
   "mouseButtons": {
@@ -142,9 +143,9 @@ make package
 The package is written to:
 
 ```text
-dist/WeGestureARM-macOS-arm64.zip
+dist/RightKeyGesture-macOS-arm64.zip
 ```
 
 ## Notes
 
-The app is ad-hoc signed for local use. On another Mac, macOS may require opening it from Finder once and confirming the security prompt. If permissions look enabled but gestures do nothing, remove the app from Accessibility and Input Monitoring, add `/Applications/WeGestureARM.app` again, then restart the app.
+The app is ad-hoc signed for local use. On another Mac, macOS may require opening it from Finder once and confirming the security prompt. If permissions look enabled but gestures do nothing, remove the app from Accessibility and Input Monitoring, add `/Applications/RightKeyGesture.app` again, then restart the app.

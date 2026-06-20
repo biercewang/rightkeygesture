@@ -1,4 +1,4 @@
-APP_NAME := WeGestureARM
+APP_NAME := RightKeyGesture
 BUILD_CONFIG ?= release
 APP_DIR := build/$(APP_NAME).app
 EXECUTABLE := .build/$(shell uname -m)-apple-macosx/$(BUILD_CONFIG)/$(APP_NAME)
